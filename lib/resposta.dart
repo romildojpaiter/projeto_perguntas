@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 
-class Resposta extends StatelessWidget {
+class BtnResposta extends StatelessWidget {
   final String resposta;
+  final void Function() onSelecao;
 
-  Resposta(this.resposta);
+  BtnResposta(this.resposta, this.onSelecao);
 
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
-      child: Text(this.resposta),
-      onPressed: null,
+    return Container(
+      width: double.infinity,
+      child: RaisedButton(
+        child: Text(this.resposta),
+        color: Colors.blue,
+        textColor: Colors.white,
+        onPressed: this.onSelecao,
+      ),
     );
   }
 }

@@ -12,7 +12,7 @@ class _PerguntaAppState extends State<PerguntaApp> {
     'Qual o seu animal favorito?'
   ];
 
-  void responder() {
+  void _responder() {
     // setState chama toda a interface gráfica para ser reinderizada
     setState(() {
       if (_perguntaSelecionada < (perguntas.length - 1)) {
@@ -34,10 +34,10 @@ class _PerguntaAppState extends State<PerguntaApp> {
         body: Column(
           children: [
             Questao(perguntas[_perguntaSelecionada]),
-            Resposta('Resposta 1'),
-            Resposta('Resposta 2'),
-            Resposta('Resposta 3'),
-            Resposta('Resposta 4')
+            BtnResposta('Resposta 1', _responder),
+            BtnResposta('Resposta 2', _responder),
+            BtnResposta('Resposta 3', _responder),
+            BtnResposta('Resposta 4', _responder)
           ],
         ),
       ),
