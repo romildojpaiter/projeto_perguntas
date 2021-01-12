@@ -2,24 +2,28 @@ import 'package:flutter/material.dart';
 
 main() => runApp(PerguntaApp());
 
-class PerguntaAppState extends State<PerguntaApp> {
-  var perguntaSelecionada = 0;
+class _PerguntaAppState extends State<PerguntaApp> {
+  var _perguntaSelecionada = 0;
+
+  final List<String> perguntas = [
+    'Qual a sua cor favorita?',
+    'Qual o seu animal favorito?'
+  ];
 
   void responder() {
     // setState chama toda a interface gráfica para ser reinderizada
     setState(() {
-      perguntaSelecionada++;
+      if (_perguntaSelecionada < (perguntas.length - 1)) {
+        _perguntaSelecionada++;
+      } else {
+        _perguntaSelecionada--;
+      }
     });
-    print(perguntaSelecionada);
+    print(_perguntaSelecionada);
   }
 
   @override // decorator
   Widget build(BuildContext context) {
-    final List<String> perguntas = [
-      'Qual a sua cor favorita?',
-      'Qual o seu animal favorito?'
-    ];
-
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -27,7 +31,7 @@ class PerguntaAppState extends State<PerguntaApp> {
         ),
         body: Column(
           children: [
-            Text(perguntas[perguntaSelecionada]),
+            Text(perguntas[_perguntaSelecionada]),
             RaisedButton(
               child: Text('Resposta 1'),
               onPressed: () => responder(),
@@ -49,7 +53,7 @@ class PerguntaAppState extends State<PerguntaApp> {
 
 class PerguntaApp extends StatefulWidget {
   @override
-  PerguntaAppState createState() {
-    return PerguntaAppState();
+  _PerguntaAppState createState() {
+    return _PerguntaAppState();
   }
 }
