@@ -7,9 +7,15 @@ main() => runApp(PerguntaApp());
 class _PerguntaAppState extends State<PerguntaApp> {
   var _perguntaSelecionada = 0;
 
-  final List<String> perguntas = [
-    'Qual a sua cor favorita?',
-    'Qual o seu animal favorito?'
+  final List<Map<String, Object>> perguntas = [
+    {
+      'pergunta': 'Qual a sua cor favorita?',
+      'respostas': ['Azul', 'Verde', 'Amarelo ', 'Branco']
+    },
+    {
+      'pergunta': 'Qual o seu animal favorito?',
+      'respostas': ['Hamster', 'Pitbull', 'Coelho', 'Capivara']
+    }
   ];
 
   void _responder() {
@@ -33,7 +39,7 @@ class _PerguntaAppState extends State<PerguntaApp> {
         ),
         body: Column(
           children: [
-            Questao(perguntas[_perguntaSelecionada]),
+            Questao(perguntas[_perguntaSelecionada]['pergunta']),
             BtnResposta('Resposta 1', _responder),
             BtnResposta('Resposta 2', _responder),
             BtnResposta('Resposta 3', _responder),
