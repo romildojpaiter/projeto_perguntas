@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './resultado.dart';
 import './questao.dart';
 import './resposta.dart';
 
@@ -53,12 +54,7 @@ class _PerguntaAppState extends State<PerguntaApp> {
                   // ...widgetsRespostas
                 ],
               )
-            : Center(
-                child: Text(
-                  'Parabens!!',
-                  style: TextStyle(fontSize: 28),
-                ),
-              ),
+            : Resultado(),
       ),
     );
   }
