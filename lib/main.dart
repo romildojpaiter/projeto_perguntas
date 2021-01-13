@@ -32,6 +32,10 @@ class _PerguntaAppState extends State<PerguntaApp> {
 
   @override // decorator
   Widget build(BuildContext context) {
+    List<String> respostas = perguntas[_perguntaSelecionada]['respostas'];
+    // List<Widget> widgetsRespostas =
+    //     respostas.map((e) => BtnResposta(e, _responder)).toList();
+
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -40,10 +44,8 @@ class _PerguntaAppState extends State<PerguntaApp> {
         body: Column(
           children: [
             Questao(perguntas[_perguntaSelecionada]['pergunta']),
-            BtnResposta('Resposta 1', _responder),
-            BtnResposta('Resposta 2', _responder),
-            BtnResposta('Resposta 3', _responder),
-            BtnResposta('Resposta 4', _responder)
+            ...respostas.map((e) => BtnResposta(e, _responder)).toList(),
+            // ...widgetsRespostas
           ],
         ),
       ),
