@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:projeto_perguntas/questionario.dart';
 import './resultado.dart';
-import './questao.dart';
-import './resposta.dart';
 
 main() => runApp(PerguntaApp());
 
@@ -35,24 +34,16 @@ class _PerguntaAppState extends State<PerguntaApp> {
 
   @override // decorator
   Widget build(BuildContext context) {
-    List<String> respostas = existePerguntaSelecionada
-        ? _perguntas[_perguntaSelecionada]['respostas']
-        : null;
-    // List<Widget> widgetsRespostas =
-    //     respostas.map((e) => BtnResposta(e, _responder)).toList();
-
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           title: Text('Perguntas'),
         ),
         body: existePerguntaSelecionada
-            ? Column(
-                children: [
-                  Questao(_perguntas[_perguntaSelecionada]['pergunta']),
-                  ...respostas.map((e) => BtnResposta(e, _responder)).toList(),
-                  // ...widgetsRespostas
-                ],
+            ? Questionario(
+                perguntaSelecionada: _perguntaSelecionada,
+                perguntas: _perguntas,
+                responder: _responder,
               )
             : Resultado(),
       ),
