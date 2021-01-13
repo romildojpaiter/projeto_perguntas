@@ -7,7 +7,7 @@ main() => runApp(PerguntaApp());
 class _PerguntaAppState extends State<PerguntaApp> {
   var _perguntaSelecionada = 0;
 
-  final List<Map<String, Object>> perguntas = [
+  final List<Map<String, Object>> _perguntas = [
     {
       'pergunta': 'Qual a sua cor favorita?',
       'respostas': ['Azul', 'Verde', 'Amarelo ', 'Branco']
@@ -19,20 +19,24 @@ class _PerguntaAppState extends State<PerguntaApp> {
   ];
 
   void _responder() {
-    // setState chama toda a interface gráfica para ser reinderizada
-    setState(() {
-      if (_perguntaSelecionada < (perguntas.length - 1)) {
+    if (existePerguntaSelecionada) {
+      // setState chama toda a interface gráfica para ser reinderizada
+      setState(() {
         _perguntaSelecionada++;
-      } else {
-        _perguntaSelecionada--;
-      }
-    });
+      });
+    }
     print(_perguntaSelecionada);
+  }
+
+  bool get existePerguntaSelecionada {
+    return _perguntaSelecionada < _perguntas.length;
   }
 
   @override // decorator
   Widget build(BuildContext context) {
-    List<String> respostas = perguntas[_perguntaSelecionada]['respostas'];
+    List<String> respostas = existePerguntaSelecionada
+        ? _perguntas[_perguntaSelecionada]['respostas']
+        : null;
     // List<Widget> widgetsRespostas =
     //     respostas.map((e) => BtnResposta(e, _responder)).toList();
 
@@ -41,13 +45,20 @@ class _PerguntaAppState extends State<PerguntaApp> {
         appBar: AppBar(
           title: Text('Perguntas'),
         ),
-        body: Column(
-          children: [
-            Questao(perguntas[_perguntaSelecionada]['pergunta']),
-            ...respostas.map((e) => BtnResposta(e, _responder)).toList(),
-            // ...widgetsRespostas
-          ],
-        ),
+        body: existePerguntaSelecionada
+            ? Column(
+                children: [
+                  Questao(_perguntas[_perguntaSelecionada]['pergunta']),
+                  ...respostas.map((e) => BtnResposta(e, _responder)).toList(),
+                  // ...widgetsRespostas
+                ],
+              )
+            : Center(
+                child: Text(
+                  'Parabens!!',
+                  style: TextStyle(fontSize: 28),
+                ),
+              ),
       ),
     );
   }
